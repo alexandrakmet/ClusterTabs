@@ -1,0 +1,162 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="js/jquery-3.6.4.slim.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTable.materializecss.min.js"></script>
+    <script src="js/dataTables.select.min.js"></script>
+    <title>ClusterTabs</title>
+</head>
+
+<body style="width: 600px">
+<ul class="collapsible brown lighten-5 z-depth-0" style="border: 0; margin-bottom: 0; margin-top: 0">
+    <li>
+        <div class="collapsible-header brown lighten-4">
+            <i class="material-icons brown-text text-darken-4" style="font-size: 30px; margin: 5px;">settings_applications</i>
+            <span class="brown-text text-darken-4" style="font-size: 20px; margin-left: 10px; margin-top: 5px;">Rule-Based Grouping</span>
+        </div>
+        <div class="collapsible-body" style="padding-top: 0 !important; padding-bottom: 0 !important;">
+            <div id="modal-custom-group">
+                <div class="modal-content">
+                    <div class="row">
+                        <ul class="collapsible expandable z-depth-0 brown lighten-5" style="border: 0; ">
+                        </ul>
+                        <a id="custom-add-group" href="#!" class="waves-effect brown darken-2 btn">
+                            <i class="material-icons left">add</i>
+                            Add group
+                        </a>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <a id="custom-group-button" href="#!"
+                       class="waves-effect brown darken-4 btn grouping-button disabled">Group</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header brown lighten-4">
+            <i class="material-icons brown-text text-darken-4" style="font-size: 30px; margin: 5px;">collections</i>
+            <span class="brown-text text-darken-4" style="font-size: 20px; margin-left: 10px; margin-top: 5px;">Auto-Cluster Grouping</span>
+        </div>
+        <div class="collapsible-body">
+            <div id="modal-cluster-group">
+                <div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select class="clustering-algorithm">
+                                <option class="brown-text text-darken-4" value="kmeans">K-means</option>
+                                <option value="optics">OPTICS</option>
+                            </select>
+                            <label>Clastering algorithm</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <select class="clustering-content">
+                                <option value="1">Content</option>
+                                <option value="2">Tags</option>
+                            </select>
+                            <label>Based on</label>
+                        </div>
+                        <div class="groups_amount_div input-field col s12">
+                            <input id="groups_amount" type="text" value="3">
+                            <label for="groups_amount">Groups amount</label>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <a id="cluster-group-button" href="#!"
+                       class="waves-effect brown darken-4 btn grouping-button disabled">Group</a>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="row brown lighten-5" style="margin-top: 0">
+    <div class="card-panel brown lighten-5" style="margin-top: 0; margin-bottom: -25px;">
+        <!--<div class="row right">
+            <a id="refresh" class="waves-effect waves-light btn modal-trigger">
+                <i class="close material-icons">refresh</i>
+            </a>
+        </div>-->
+
+        <div class="row">
+            <table id="mainTable" class="highlight">
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Custom Group -->
+<!--<div id="modal-custom-group" class="modal">
+    <div class="modal-content">
+        <h4>Custom grouping</h4>
+        <div class="row">
+            <ul class="collapsible expandable">
+            </ul>
+            <a id="custom-add-group" href="#!" class="waves-effect waves-green btn">Add group</a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a id="custom-group-button" href="#!" class="modal-close waves-effect waves-green btn">Group</a>
+        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+    </div>
+</div>-->
+
+<!-- Modal Cluster Group -->
+<!--<div id="modal-cluster-group" class="modal">
+    <div class="modal-content">
+        <h4>Cluster grouping</h4>
+        <div class="row">
+            <div class="input-field col s12">
+                <select class="clustering-algorithm">
+                    <option value="kmeans">K-means</option>
+                    <option value="dbscan">DBSCAN</option>
+                </select>
+                <label>Clastering algorithm</label>
+            </div>
+            <div class="input-field col s12">
+                <select class="clustering-content">
+                    <option value="1">Content</option>
+                    <option value="2">Tags</option>
+                </select>
+                <label>Based on</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="groups_amount" type="text" value="3">
+                <label for="groups_amount">Groups amount</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a id="cluster-group-button" href="#!" class="modal-close waves-effect waves-green btn">Group</a>
+        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+    </div>
+</div>-->
+
+<div class="loader-mask mask valign-wrapper center-align" style="background-color: rgba(0, 0, 0, 0.2)">
+    <div class="row">
+        <div class="div col s2 offset-s3">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/popup.js"></script>
+</body>
+
+</html>
